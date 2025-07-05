@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Key, Save, AlertCircle, CheckCircle } from 'lucide-react';
 import { useBias } from '../context/BiasContext';
+import { useLanguage } from '../context/LanguageContext';
 
 export const ApiKeySetup: React.FC = () => {
   const { darkMode } = useBias();
+  const { t } = useLanguage();
   const [keys, setKeys] = useState({
     newsApi: '',
     gnews: ''
@@ -46,7 +48,7 @@ export const ApiKeySetup: React.FC = () => {
         <Key className="w-5 h-5 text-yellow-400" />
         <h3 className={`text-lg font-semibold transition-colors duration-300 ${
           darkMode ? 'text-white' : 'text-gray-900'
-        }`}>API Configuration</h3>
+        }`}>{t('api.title')}</h3>
       </div>
       
       <div className="mb-4 p-4 bg-green-500/20 border border-green-500/30 rounded-lg">
@@ -54,12 +56,12 @@ export const ApiKeySetup: React.FC = () => {
           <CheckCircle className="w-5 h-5 text-green-400" />
           <h4 className={`font-medium transition-colors duration-300 ${
             darkMode ? 'text-white' : 'text-gray-900'
-          }`}>API Keys Configured!</h4>
+          }`}>{t('api.configured.title')}</h4>
         </div>
         <p className={`text-sm mt-1 transition-colors duration-300 ${
           darkMode ? 'text-gray-300' : 'text-gray-600'
         }`}>
-          Your NewsAPI and GNews keys are already set up and ready to use.
+          {t('api.configured.subtitle')}
         </p>
       </div>
       
@@ -68,13 +70,13 @@ export const ApiKeySetup: React.FC = () => {
           <label className={`block text-sm font-medium mb-1 transition-colors duration-300 ${
             darkMode ? 'text-gray-300' : 'text-gray-700'
           }`}>
-            NewsAPI Key
+            {t('api.newsapi.label')}
           </label>
           <input
             type="password"
             value={keys.newsApi}
             onChange={(e) => setKeys(prev => ({ ...prev, newsApi: e.target.value }))}
-            placeholder="Get from newsapi.org"
+            placeholder={t('api.newsapi.placeholder')}
             className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300 ${
               darkMode 
                 ? 'bg-white/10 border-white/20 text-white placeholder-gray-400' 
@@ -87,13 +89,13 @@ export const ApiKeySetup: React.FC = () => {
           <label className={`block text-sm font-medium mb-1 transition-colors duration-300 ${
             darkMode ? 'text-gray-300' : 'text-gray-700'
           }`}>
-            GNews API Key
+            {t('api.gnews.label')}
           </label>
           <input
             type="password"
             value={keys.gnews}
             onChange={(e) => setKeys(prev => ({ ...prev, gnews: e.target.value }))}
-            placeholder="Get from gnews.io"
+            placeholder={t('api.gnews.placeholder')}
             className={`w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors duration-300 ${
               darkMode 
                 ? 'bg-white/10 border-white/20 text-white placeholder-gray-400' 
@@ -106,12 +108,12 @@ export const ApiKeySetup: React.FC = () => {
       <div className="mb-4 p-4 bg-blue-500/20 border border-blue-500/30 rounded-lg">
         <h4 className={`font-medium mb-2 transition-colors duration-300 ${
           darkMode ? 'text-white' : 'text-gray-900'
-        }`}>API Information:</h4>
+        }`}>{t('api.info.title')}</h4>
         <ul className={`text-sm space-y-1 transition-colors duration-300 ${
           darkMode ? 'text-gray-300' : 'text-gray-600'
         }`}>
-          <li>• <strong>NewsAPI:</strong> 100 requests/day (free tier) - <a href="https://newsapi.org" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">newsapi.org</a></li>
-          <li>• <strong>GNews:</strong> 100 requests/day (free tier) - <a href="https://gnews.io" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">gnews.io</a></li>
+          <li>• <strong>NewsAPI:</strong> {t('api.info.newsapi')} - <a href="https://newsapi.org" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">newsapi.org</a></li>
+          <li>• <strong>GNews:</strong> {t('api.info.gnews')} - <a href="https://gnews.io" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">gnews.io</a></li>
         </ul>
       </div>
       
@@ -120,7 +122,7 @@ export const ApiKeySetup: React.FC = () => {
           darkMode ? 'text-gray-400' : 'text-gray-600'
         }`}>
           <AlertCircle className="w-4 h-4" />
-          <span>API keys are stored locally in your browser</span>
+          <span>{t('api.storage.note')}</span>
         </div>
         
         <button
@@ -130,12 +132,12 @@ export const ApiKeySetup: React.FC = () => {
           {saved ? (
             <>
               <CheckCircle className="w-4 h-4" />
-              <span>Saved!</span>
+              <span>{t('api.button.saved')}</span>
             </>
           ) : (
             <>
               <Save className="w-4 h-4" />
-              <span>Update Keys</span>
+              <span>{t('api.button.update')}</span>
             </>
           )}
         </button>

@@ -1,9 +1,11 @@
 import React from 'react';
 import { BarChart3, TrendingUp, Eye, BookOpen, Calendar, Users, Target, Zap, Award } from 'lucide-react';
 import { useBias } from '../context/BiasContext';
+import { useLanguage } from '../context/LanguageContext';
 
 export const Dashboard: React.FC = () => {
   const { darkMode } = useBias();
+  const { t } = useLanguage();
   
   const biasHistory = [
     { date: '2024-01-15', left: 3, center: 7, right: 2 },
@@ -22,10 +24,10 @@ export const Dashboard: React.FC = () => {
   ];
 
   const stats = [
-    { label: 'Articles Analyzed', value: '247', icon: BookOpen, color: 'from-blue-500 to-blue-600', change: '+12%' },
-    { label: 'Bias Alerts', value: '12', icon: Target, color: 'from-yellow-500 to-yellow-600', change: '-8%' },
-    { label: 'Sources Tracked', value: '89', icon: Eye, color: 'from-green-500 to-green-600', change: '+23%' },
-    { label: 'Reading Streak', value: '15 days', icon: Award, color: 'from-purple-500 to-purple-600', change: 'New!' },
+    { label: t('dashboard.stats.analyzed'), value: '247', icon: BookOpen, color: 'from-blue-500 to-blue-600', change: '+12%' },
+    { label: t('dashboard.stats.alerts'), value: '12', icon: Target, color: 'from-yellow-500 to-yellow-600', change: '-8%' },
+    { label: t('dashboard.stats.sources'), value: '89', icon: Eye, color: 'from-green-500 to-green-600', change: '+23%' },
+    { label: t('dashboard.stats.streak'), value: `15 ${t('dashboard.stats.days')}`, icon: Award, color: 'from-purple-500 to-purple-600', change: t('common.new') },
   ];
 
   return (
@@ -35,24 +37,24 @@ export const Dashboard: React.FC = () => {
         <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-gradient-to-r from-green-500/20 to-blue-500/20 border border-green-500/30 backdrop-blur-sm">
           <BarChart3 className="w-4 h-4 text-green-400" />
           <span className={`text-sm font-medium ${darkMode ? 'text-green-300' : 'text-green-600'}`}>
-            Personal Analytics
+            {t('dashboard.hero.badge')}
           </span>
         </div>
         
         <h1 className="text-4xl md:text-5xl font-bold leading-tight">
           <span className="bg-gradient-to-r from-green-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">
-            Your Reading
+            {t('dashboard.hero.title1')}
           </span>
           <br />
           <span className={`${darkMode ? 'text-white' : 'text-gray-900'}`}>
-            Analytics
+            {t('dashboard.hero.title2')}
           </span>
         </h1>
         
         <p className={`text-lg max-w-2xl mx-auto leading-relaxed ${
           darkMode ? 'text-gray-300' : 'text-gray-600'
         }`}>
-          Track your news consumption patterns, bias exposure, and reading habits over time.
+          {t('dashboard.hero.subtitle')}
         </p>
       </div>
 
@@ -114,10 +116,10 @@ export const Dashboard: React.FC = () => {
               </div>
               <div>
                 <h3 className={`text-xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                  Bias Exposure History
+                  {t('dashboard.bias.title')}
                 </h3>
                 <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                  Last 5 days of reading patterns
+                  {t('dashboard.bias.subtitle')}
                 </p>
               </div>
             </div>
@@ -132,7 +134,7 @@ export const Dashboard: React.FC = () => {
                         {new Date(day.date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
                       </span>
                       <span className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                        {total} articles
+                        {total} {t('dashboard.bias.articles')}
                       </span>
                     </div>
                     <div className="flex h-3 bg-gray-700/20 rounded-full overflow-hidden">
@@ -157,15 +159,15 @@ export const Dashboard: React.FC = () => {
             <div className="flex items-center justify-center space-x-6 mt-6 pt-6 border-t border-white/10">
               <div className="flex items-center space-x-2">
                 <div className="w-3 h-3 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full"></div>
-                <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Left</span>
+                <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>{t('bias.left')}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <div className="w-3 h-3 bg-gradient-to-r from-gray-400 to-gray-500 rounded-full"></div>
-                <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Center</span>
+                <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>{t('bias.center')}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <div className="w-3 h-3 bg-gradient-to-r from-red-500 to-red-600 rounded-full"></div>
-                <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>Right</span>
+                <span className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>{t('bias.right')}</span>
               </div>
             </div>
           </div>
@@ -186,10 +188,10 @@ export const Dashboard: React.FC = () => {
               </div>
               <div>
                 <h3 className={`text-xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                  Top Sources
+                  {t('dashboard.sources.title')}
                 </h3>
                 <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                  Most read news sources
+                  {t('dashboard.sources.subtitle')}
                 </p>
               </div>
             </div>
@@ -220,7 +222,7 @@ export const Dashboard: React.FC = () => {
                         {source.name}
                       </div>
                       <div className={`text-xs capitalize ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                        {source.bias} • {source.factuality}/10 factuality
+                        {t(`bias.${source.bias.replace('-', '')}`)} • {source.factuality}/10 {t('dashboard.sources.factuality')}
                       </div>
                     </div>
                   </div>
@@ -229,7 +231,7 @@ export const Dashboard: React.FC = () => {
                       {source.articles}
                     </div>
                     <div className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                      articles
+                      {t('dashboard.sources.articles')}
                     </div>
                   </div>
                 </div>

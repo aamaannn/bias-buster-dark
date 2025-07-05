@@ -112,8 +112,8 @@ export const ApiKeySetup: React.FC = () => {
         <ul className={`text-sm space-y-1 transition-colors duration-300 ${
           darkMode ? 'text-gray-300' : 'text-gray-600'
         }`}>
-          <li>• <strong>NewsAPI:</strong> {t('api.info.newsapi')} - <a href="https://newsapi.org" target=\"_blank" rel="noopener noreferrer\" className="text-blue-400 hover:text-blue-300">newsapi.org</a></li>
-          <li>• <strong>GNews:</strong> {t('api.info.gnews')} - <a href="https://gnews.io" target=\"_blank" rel="noopener noreferrer\" className="text-blue-400 hover:text-blue-300">gnews.io</a></li>
+          <li>• <strong>NewsAPI:</strong> {t('api.info.newsapi')} - <a href="https://newsapi.org" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">newsapi.org</a></li>
+          <li>• <strong>GNews:</strong> {t('api.info.gnews')} - <a href="https://gnews.io" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300">gnews.io</a></li>
         </ul>
       </div>
       

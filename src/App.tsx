@@ -7,6 +7,7 @@ import { ApiKeySetup } from './components/ApiKeySetup';
 import { AuroraBackground } from './components/AuroraBackground';
 import { ClickSpark } from './components/ClickSpark';
 import { BiasProvider, useBias } from './context/BiasContext';
+import { LanguageProvider } from './context/LanguageContext';
 
 function AppContent() {
   const { darkMode } = useBias();
@@ -57,9 +58,11 @@ function AppContent() {
 
 function App() {
   return (
-    <BiasProvider>
-      <AppContent />
-    </BiasProvider>
+    <LanguageProvider>
+      <BiasProvider>
+        <AppContent />
+      </BiasProvider>
+    </LanguageProvider>
   );
 }
 

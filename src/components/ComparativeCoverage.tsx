@@ -1,6 +1,7 @@
 import React from 'react';
 import { ExternalLink, TrendingUp, TrendingDown, Minus, Clock, Users } from 'lucide-react';
 import { useBias } from '../context/BiasContext';
+import { useLanguage } from '../context/LanguageContext';
 
 interface CoverageItem {
   source: string;
@@ -19,6 +20,7 @@ interface ComparativeCoverageProps {
 
 export const ComparativeCoverage: React.FC<ComparativeCoverageProps> = ({ coverage, onSourceClick }) => {
   const { darkMode } = useBias();
+  const { t } = useLanguage();
   
   const getBiasColor = (bias: string) => {
     switch (bias) {
@@ -62,10 +64,10 @@ export const ComparativeCoverage: React.FC<ComparativeCoverageProps> = ({ covera
           </div>
           <div>
             <h3 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-              Comparative Coverage
+              {t('coverage.title')}
             </h3>
             <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-              How different sources frame this story
+              {t('coverage.subtitle')}
             </p>
           </div>
         </div>
@@ -124,7 +126,7 @@ export const ComparativeCoverage: React.FC<ComparativeCoverageProps> = ({ covera
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-4 text-xs">
                       <div className="flex items-center space-x-1">
-                        <span className={darkMode ? 'text-gray-400' : 'text-gray-600'}>Factuality:</span>
+                        <span className={darkMode ? 'text-gray-400' : 'text-gray-600'}>{t('coverage.factuality')}</span>
                         <span className={`font-medium ${
                           item.factuality >= 8 ? 'text-green-400' : 
                           item.factuality >= 6 ? 'text-yellow-400' : 'text-red-400'
@@ -133,9 +135,9 @@ export const ComparativeCoverage: React.FC<ComparativeCoverageProps> = ({ covera
                         </span>
                       </div>
                       <div className="flex items-center space-x-1">
-                        <span className={darkMode ? 'text-gray-400' : 'text-gray-600'}>Tone:</span>
+                        <span className={darkMode ? 'text-gray-400' : 'text-gray-600'}>{t('coverage.tone')}</span>
                         <span className={`font-medium capitalize ${getSentimentColor(item.sentiment)}`}>
-                          {item.sentiment}
+                          {t(`social.${item.sentiment}`)}
                         </span>
                       </div>
                     </div>
@@ -162,10 +164,10 @@ export const ComparativeCoverage: React.FC<ComparativeCoverageProps> = ({ covera
               <Users className="w-8 h-8 text-gray-400" />
             </div>
             <p className={`text-lg font-medium mb-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-              No comparative coverage found
+              {t('coverage.noResults')}
             </p>
             <p className={`text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-              Try analyzing a more recent or popular article
+              {t('coverage.noResults.subtitle')}
             </p>
           </div>
         )}

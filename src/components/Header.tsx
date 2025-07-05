@@ -1,6 +1,8 @@
 import React from 'react';
 import { Search, BarChart3, Database, Settings, Moon, Sun } from 'lucide-react';
 import { useBias } from '../context/BiasContext';
+import { useLanguage } from '../context/LanguageContext';
+import { LanguageToggle } from './LanguageToggle';
 
 interface HeaderProps {
   activeTab: 'analyzer' | 'dashboard' | 'sources' | 'settings';
@@ -9,12 +11,13 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
   const { darkMode, setDarkMode } = useBias();
+  const { t } = useLanguage();
 
   const tabs = [
-    { id: 'analyzer', label: 'Article Analyzer', icon: Search },
-    { id: 'dashboard', label: 'Dashboard', icon: BarChart3 },
-    { id: 'sources', label: 'Source Directory', icon: Database },
-    { id: 'settings', label: 'API Settings', icon: Settings },
+    { id: 'analyzer', label: t('header.analyzer'), icon: Search },
+    { id: 'dashboard', label: t('header.dashboard'), icon: BarChart3 },
+    { id: 'sources', label: t('header.sources'), icon: Database },
+    { id: 'settings', label: t('header.settings'), icon: Settings },
   ];
 
   return (
@@ -31,7 +34,7 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
                 <Search className="w-4 h-4 text-white" />
               </div>
               <h1 className="text-xl font-bold bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">
-                Bias Buster
+                {t('header.title')}
               </h1>
             </div>
           </div>
@@ -64,17 +67,21 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab }) => {
             })}
           </nav>
 
-          <button
-            onClick={() => setDarkMode(!darkMode)}
-            className={`p-2 rounded-lg transition-all duration-200 ${
-              darkMode 
-                ? 'bg-white/10 hover:bg-white/20 text-yellow-400' 
-                : 'bg-black/10 hover:bg-black/20 text-gray-700'
-            }`}
-            title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
-          >
-            {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-          </button>
+          <div className="flex items-center space-x-2">
+            <LanguageToggle />
+            
+            <button
+              onClick={() => setDarkMode(!darkMode)}
+              className={`p-2 rounded-lg transition-all duration-200 ${
+                darkMode 
+                  ? 'bg-white/10 hover:bg-white/20 text-yellow-400' 
+                  : 'bg-black/10 hover:bg-black/20 text-gray-700'
+              }`}
+              title={darkMode ? t('header.lightMode') : t('header.darkMode')}
+            >
+              {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
       </div>
     </header>
